@@ -1,4 +1,4 @@
-package it.polito.tdp.artsmia.model;
+ package it.polito.tdp.artsmia.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import it.polito.tdp.artsmia.db.ArtsmiaDAO;
 public class Model {
 
 	private Graph<ArtObject, DefaultWeightedEdge> grafo;
-	private Map<Integer, ArtObject> idMap;
+	private Map<Integer, ArtObject> idMap; // si chiede al DAO di riempirla
 	
 	
 	public Model() {
@@ -36,9 +36,9 @@ public class Model {
 			for(ArtObject a2 : this.grafo.vertexSet()) {
 				//devo collegare a1 con a2?
 				//controllo se non esiste già l'arco
-				int peso = dao.getPeso(a1, a2);
+				int peso = dao.getPeso(a1, a2); 
 				if(peso > 0) {
-					if(!this.grafo.containsEdge(a1, a2)) {
+					if(!this.grafo.containsEdge(a1, a2)) { // ritorna vero sono se contiene già un arco
 						Graphs.addEdge(this.grafo, a1, a2, peso);
 					}
 				}

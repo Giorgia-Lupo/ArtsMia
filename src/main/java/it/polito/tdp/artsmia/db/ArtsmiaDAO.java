@@ -13,6 +13,7 @@ import it.polito.tdp.artsmia.model.ArtObject;
 
 public class ArtsmiaDAO {
 
+	//void perchè tanto tutto viene salvato nella Map
 	public void listObjects(Map<Integer, ArtObject> idMap) {
 		String sql = "SELECT * from objects";
 		Connection conn = DBConnect.getConnection();
@@ -38,6 +39,7 @@ public class ArtsmiaDAO {
 		}
 	}
 
+	//PER METODO 1)
 	public int getPeso(ArtObject a1, ArtObject a2) {
 
 		String sql = "select count(*) as peso " + 
@@ -63,12 +65,12 @@ public class ArtsmiaDAO {
 		return -1;
 	}
 	
-	
+	//PER METODO 2)
 	public List<Adiacenza> getAdiacenze(){
 		String sql = "select eo1.object_id as obj1, eo2.object_id as obj2, count(*) as peso " + 
 				"from exhibition_objects as eo1, exhibition_objects as eo2 " + 
 				"where eo1.exhibition_id = eo2.exhibition_id " + 
-				"and eo1.object_id > eo2.object_id " + 
+				"and eo1.object_id > eo2.object_id " + //per avere una sola coppia
 				"group by eo1.object_id, eo2.object_id";
 		Connection conn = DBConnect.getConnection();
 		List<Adiacenza> adiacenze = new ArrayList<Adiacenza>();
